@@ -1,6 +1,6 @@
 # End-to-End Data Management Pipeline for a Recommendation System
 
-**Student:** Suganya Devi | **ID:** 2025ag05598
+**Student:** Suganya Devi | **ID:** 2025ag05598 | **Repo:** https://github.com/Suganyasugu-cloud/-recommendation-pipeline
 
 DM4ML Assignment 2. Dataset: **MovieLens 100K** (943 users, 1682 movies, 100K ratings).
 Stages: Ingestion → Validation → Preparation → Transformation → Features → Training → Evaluation, orchestrated with **Prefect**.
