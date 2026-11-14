@@ -1,0 +1,13 @@
+pandas==2.2.3
+numpy==1.26.4
+pyarrow==17.0.0
+scipy>=1.13
+scikit-learn>=1.5
+PyYAML>=6.0
+requests>=2.31
+joblib>=1.4
+tabulate>=0.9
+matplotlib>=3.8
+mlflow>=3.0
+prefect>=3.0
+pytest>=8.0

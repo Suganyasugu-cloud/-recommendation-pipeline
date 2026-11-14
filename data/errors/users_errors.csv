@@ -1,0 +1,11 @@
+user_id,age,gender,occupation,zip_code,error_reasons
+36,unknown,F,student,93117,wrong_dtype_age (repaired: age blanked)
+101,unknown,M,student,05146,wrong_dtype_age (repaired: age blanked)
+134,unknown,M,programmer,80236,wrong_dtype_age (repaired: age blanked)
+217,unknown,M,other,11727,wrong_dtype_age (repaired: age blanked)
+223,unknown,F,student,47906,wrong_dtype_age (repaired: age blanked)
+300,unknown,F,programmer,55106,wrong_dtype_age (repaired: age blanked)
+524,unknown,M,educator,02159,wrong_dtype_age (repaired: age blanked)
+576,unknown,M,executive,98281,wrong_dtype_age (repaired: age blanked)
+859,unknown,F,other,06492,wrong_dtype_age (repaired: age blanked)
+915,unknown,M,entertainment,60614,wrong_dtype_age (repaired: age blanked)

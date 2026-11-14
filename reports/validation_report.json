@@ -1,0 +1,29 @@
+{
+  "users": {
+    "rows_in": 943,
+    "rows_valid": 943,
+    "rows_rejected": 10,
+    "rule_violations": {
+      "wrong_dtype_age": 10
+    }
+  },
+  "items": {
+    "rows_in": 1682,
+    "rows_valid": 1682,
+    "rows_rejected": 0,
+    "rule_violations": {}
+  },
+  "interactions": {
+    "rows_in": 100060,
+    "rows_valid": 99866,
+    "rows_rejected": 194,
+    "rule_violations": {
+      "duplicate_row": 60,
+      "missing_value": 39,
+      "invalid_rating": 30,
+      "invalid_timestamp": 25,
+      "orphan_user_id": 20,
+      "orphan_item_id": 20
+    }
+  }
+}

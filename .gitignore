@@ -1,0 +1,10 @@
+.venv/
+.prefect/
+__pycache__/
+mlruns/
+mlflow.db
+data/raw/
+data/processed/
+data/features/
+models/*.joblib
+.pytest_cache/

@@ -1,0 +1,21 @@
+# Feature Catalog
+
+| Entity | Feature | Type | Description | Definition |
+|---|---|---|---|---|
+| user | `user_activity_count` | int | Number of ratings given by the user | count(train ratings of user) |
+| user | `user_avg_rating` | float | Mean rating given by the user | mean(rating) per user |
+| user | `user_rating_std` | float | Rating spread of the user | std(rating) per user, 0 if single rating |
+| user | `user_positive_ratio` | float | Share of the user's ratings that are positive | mean(rating >= threshold) |
+| user | `user_preferred_genre` | str | Genre the user rates positively most often | argmax genre count over positive ratings |
+| user | `user_days_since_last_interaction` | float | Recency of the user's last rating | (as_of - max(timestamp)) / 86400 |
+| user | `age / gender / occupation` | int/str | Demographic attributes | from validated users table |
+| item | `item_popularity` | int | Number of ratings received | count(train ratings of item) |
+| item | `item_positive_count` | int | Number of positive ratings received | count(rating >= threshold) |
+| item | `item_avg_rating` | float | Mean rating received | mean(rating) per item |
+| item | `item_popularity_rank` | int | Rank by positive count (1 = most popular) | rank(item_positive_count, desc) |
+| item | `item_days_since_last_rating` | float | Recency of the item's last rating | (as_of - max(timestamp)) / 86400 |
+| item | `release_year / item_age_years` | int | Release year and age at as_of | year(as_of) - release_year |
+| item | `n_genres` | int | Number of genres tagged on the item | sum(genre flags) |
+| interaction | `user_genre_affinity` | float | How strongly the user's genre profile matches the item | mean over item genres of user's positive-rating share in that genre |
+| interaction | `expected_rating_bias` | float | Baseline rating estimate | global_mean + (user_avg - global_mean) + (item_avg - global_mean) |
+| interaction | `item_popularity_percentile` | float | Item popularity percentile in [0,1] | 1 - (rank - 1) / n_items |

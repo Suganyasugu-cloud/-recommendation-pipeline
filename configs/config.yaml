@@ -1,0 +1,47 @@
+# Central configuration. Every stage reads from here so runs are reproducible.
+seed: 42
+
+paths:
+  raw: data/raw
+  processed: data/processed
+  features: data/features
+  errors: data/errors
+  models: models
+  reports: reports
+
+ingestion:
+  dataset_url: https://files.grouplens.org/datasets/movielens/ml-100k.zip
+  dataset_dir: ml-100k
+  # Real MovieLens data is clean, so a small, seeded set of faults is injected
+  # into a COPY of the raw data to exercise the validation stage. Set to false
+  # to run on the untouched dataset.
+  inject_faults: true
+  fault_counts:
+    null_ratings: 40
+    duplicate_rows: 60
+    invalid_ratings: 30
+    invalid_timestamps: 25
+    orphan_users: 20
+    orphan_items: 20
+    bad_age_type: 10
+
+validation:
+  rating_min: 1
+  rating_max: 5
+  min_timestamp: 631152000      # 1990-01-01 UTC
+  max_timestamp: 1893456000     # 2030-01-01 UTC
+  age_min: 5
+  age_max: 100
+
+split:
+  test_fraction: 0.2            # most recent 20% of interactions (by timestamp)
+
+features:
+  positive_rating_threshold: 4  # rating >= threshold counts as relevant
+
+training:
+  top_k: 10
+  svd_factors: 30
+  knn_neighbors: 50
+  mlflow_tracking_uri: sqlite:///mlflow.db
+  mlflow_experiment: recsys-dm4ml
