@@ -21,7 +21,7 @@ python -m src.pipeline --from-stage training   # resume from a stage
 python -m dags.prefect_flow            # same stages as a Prefect flow (task dependencies)
 python -m dags.prefect_flow --serve    # daily 02:00 schedule
 pytest -q                              # unit tests
-python -m src.serve 1                  # top-10 for user 1 using the shared FeatureStore
+python -m src.serve 1                  # user 1: feature profile + top-10 with features (shared FeatureStore)
 mlflow ui --backend-store-uri sqlite:///mlflow.db   # inspect runs
 ```
 To see the Prefect UI: `prefect server start`, then `export PREFECT_API_URL=http://127.0.0.1:4200/api` and run the flow.
@@ -52,6 +52,7 @@ Workflow file: [`dags/prefect_flow.py`](dags/prefect_flow.py). Screenshot of a c
 - Validation report: `reports/validation_report.md` (+ `data/errors/*.csv`)
 - Feature catalog: `reports/feature_catalog.md`
 - Model comparison: `reports/model_comparison.md`
+- MLflow runs (params + metrics snapshot): `reports/mlflow_runs.csv`
 - Successful run screenshot: `reports/screenshots/prefect_run_graph.png`
 - Final report: `reports/final_report.pdf`
 

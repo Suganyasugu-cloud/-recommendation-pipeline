@@ -3,8 +3,10 @@
 __pycache__/
 mlruns/
 mlflow.db
-data/raw/
-data/processed/
-data/features/
+data/raw/*
+data/processed/*
+data/features/*
+!data/*/.gitkeep
 models/*.joblib
 .pytest_cache/
+.DS_Store

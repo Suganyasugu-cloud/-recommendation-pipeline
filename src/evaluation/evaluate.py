@@ -69,8 +69,20 @@ def run(config: dict) -> dict:
     note = ("RMSE/MAE: popularity = item mean rating; svd_mf = bias + latent factors; item_knn is "
             "ranking-only (NaN). Users evaluated: those with at "
             f"least one test rating >= {threshold} who appear in train. Seen items are excluded.")
+    markdown_table = table.astype(object).where(table.notna(), "n/a").to_markdown()
     (reports / "model_comparison.md").write_text(
-        f"# Model Comparison (K={k})\n\n{table.astype(object).where(table.notna(), "n/a").to_markdown()}\n\n{note}\n")
+        f"# Model Comparison (K={k})\n\n{markdown_table}\n\n{note}\n")
     with mlflow.start_run(run_name="comparison"):
         mlflow.log_artifact(str(reports / "model_comparison.csv"))
+    export_mlflow_runs(config, reports)
     return results
+
+
+def export_mlflow_runs(config: dict, reports) -> None:
+    """Snapshot tracked params and metrics to reports/mlflow_runs.csv (the MLflow DB is not committed)."""
+    runs = mlflow.search_runs(experiment_names=[config["training"]["mlflow_experiment"]])
+    runs = runs[runs["tags.mlflow.runName"] != "comparison"]
+    keep = ["run_id", "tags.mlflow.runName", "start_time"] + sorted(
+        c for c in runs.columns if c.startswith(("params.", "metrics.")))
+    latest = runs.sort_values("start_time").groupby("tags.mlflow.runName").tail(1)
+    latest[keep].to_csv(reports / "mlflow_runs.csv", index=False)
