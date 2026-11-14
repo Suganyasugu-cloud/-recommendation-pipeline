@@ -1,6 +1,8 @@
 # End-to-End Data Management Pipeline for a Recommendation System
 
-DM4ML Assignment 2
+DM4ML Assignment 2  
+**Name:** Suganya Devi  
+**ID:** 2025ag05598
 
 ## 1. Overview and tools
 The pipeline recommends movies using MovieLens 100K (943 users, 1,682 items, ~100K ratings with timestamps; users have age/gender/occupation, items have release date and 19 genre flags). It runs seven stages: ingestion, validation, preparation, transformation, feature management, training and evaluation. Tools: Python, pandas/pyarrow (Parquet storage), scipy and scikit-learn (models), MLflow (tracking, SQLite backend), Prefect (orchestration), pytest. Validation and the feature layer are custom code so every rule and feature definition is visible and testable.
