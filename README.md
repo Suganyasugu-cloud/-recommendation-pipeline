@@ -54,7 +54,7 @@ Workflow file: [`dags/prefect_flow.py`](dags/prefect_flow.py). Screenshot of a c
 - Model comparison: `reports/model_comparison.md`
 - MLflow runs (params + metrics snapshot): `reports/mlflow_runs.csv`
 - Successful run screenshot: `reports/screenshots/prefect_run_graph.png`
-- Final report: `reports/final_report.pdf`
+- Final report: `reports/2025ag05598_DM4ML_recommendation_Report.pdf`
 
 ## Key design decisions
 - **Fault injection.** MovieLens is already clean, so a seeded set of faults (nulls, duplicates, invalid ratings/timestamps, orphan keys, bad age type) is added to the raw copy. Disable with `ingestion.inject_faults: false`.
