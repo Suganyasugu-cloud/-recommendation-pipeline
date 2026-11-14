@@ -29,6 +29,11 @@ To see the Prefect UI: `prefect server start`, then `export PREFECT_API_URL=http
 
 All settings (paths, thresholds, split, model hyper-parameters, seed) live in `configs/config.yaml`.
 
+## Orchestration: successful run
+Workflow file: [`dags/prefect_flow.py`](dags/prefect_flow.py). Screenshot of a completed run, with all 7 tasks in dependency order:
+
+![Successful Prefect run](reports/screenshots/prefect_run_graph.png)
+
 ## Layout
 | Path | Purpose |
 |---|---|

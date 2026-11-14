@@ -10,6 +10,8 @@ The pipeline recommends movies using MovieLens 100K (943 users, 1,682 items, ~10
 
 ![Architecture](architecture.png)
 
+*Figure 1: Pipeline architecture (`reports/architecture.png` in the repo).*
+
 ## 2. Design decisions
 **Ingestion and validation.** Raw users, items and interactions are written to CSV. Because MovieLens is clean, a documented, seeded set of faults is injected into the raw copy: 40 null ratings, 60 duplicate rows, 30 out-of-range ratings, 25 bad timestamps, 20 orphan user ids, 20 orphan item ids and 10 non-numeric ages. Validation checks nulls, types, rating range (1-5), timestamp range, duplicates and referential integrity. All injected faults were detected: 194 interaction rows were quarantined to `data/errors/interactions_errors.csv` with the violated rules. Users whose only fault was a bad age (10) were repaired (age blanked and later median-imputed) instead of dropped, since dropping them would have orphaned their ratings; they are still logged.
 
@@ -20,6 +22,10 @@ The pipeline recommends movies using MovieLens 100K (943 users, 1,682 items, ~10
 **Models.** (1) Popularity baseline (most positive ratings). (2) Item-based collaborative filtering (cosine similarity on positive feedback, 50 neighbours). (3) SVD matrix factorisation with damped user/item biases and 30 latent factors, ranked by predicted rating over items with at least 20 ratings. Parameters, model files and the feature catalog are logged per run in MLflow; evaluation metrics are logged to the same runs.
 
 **Orchestration.** A Prefect flow chains the seven tasks with explicit `wait_for` dependencies, one retry on ingestion, and an optional daily cron. The equivalent Airflow DAG is included. The seed is fixed in the config, so reruns give the same results.
+
+![Successful Prefect run](screenshots/prefect_run_graph.png)
+
+*Figure 2: Successful Prefect run of `recsys-pipeline` (all 7 tasks Completed, in dependency order). In the GitHub repo: workflow file `dags/prefect_flow.py`, screenshot `reports/screenshots/prefect_run_graph.png`.*
 
 ## 3. Results (K = 10, 905 evaluated users)
 | Model | P@10 | R@10 | NDCG@10 | Coverage | Diversity | RMSE | MAE |
